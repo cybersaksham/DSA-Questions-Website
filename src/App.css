@@ -1,38 +1,263 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+:root {
+  --topicWidth: 75%;
+  --topicName: 95%;
+  --statusWidth: 10%;
+  --progressWidth: 15%;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  background: #eee;
+}
+.container {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 90%;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1em;
+  font-weight: 600;
+  color: #bdbdbd;
+  padding: 20px !important;
+  box-sizing: border-box;
+  user-select: none;
+  /* text-align: center; */
+  width: 100%;
+}
+header .topic-col {
+  width: var(--topicWidth);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+header .questions-col {
+  width: var(--statusWidth);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+header .progress-col {
+  width: var(--progressWidth);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+header label {
+  display: inline-block;
+  margin: 0;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header .icon-col {
+  padding-right: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul.task-items {
+  width: 100%;
+  padding-left: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+ul.task-items li.item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 20px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+}
+ul.task-items li.item .task {
+  display: flex;
+  align-items: center;
+  width: var(--topicWidth);
+}
+ul.task-items li.item .task .name {
+  /* background: #eee; */
+  margin-left: 20px;
+  width: var(--topicName);
+  height: 25px;
+  border-radius: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+ul.task-items li.item .status {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  color: #2e7d32;
+  width: var(--statusWidth);
+  /* margin-left: 30px; */
+  padding-right: 10px;
+}
+ul.task-items li.item .status .icon {
+  background: #2e7d32;
+  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+ul.task-items li.item .status .icon.risk {
+  background: red;
+}
+ul.task-items li.item .status .icon.warning {
+  background: #ffa000;
+}
+ul.task-items li.item .status .icon.off {
+  background: #bf360c;
+}
+ul.task-items li.item .progress {
+  width: var(--progressWidth);
+}
+ul.task-items li.item .progress progress {
+  display: block;
+  margin-left: 0;
+  -webkit-appearance: none;
+  height: 100%;
+  width: 100%;
+}
+ul.task-items li.item .progress progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 5px;
+}
+ul.task-items li.item .progress ::-webkit-progress-value {
+  background-color: #4dd0e1;
+  border-radius: 5px;
+}
+ul.task-items li.item .dates {
+  width: 150px;
+}
+ul.task-items li.item .dates .bar,
+ul.task-items li.item .priority .bar {
+  background: #eee;
+  width: 100px;
+  height: 25px;
+  border-radius: 15px;
+}
+ul.task-items li.item .priority {
+  width: 144.5px;
+}
+ul.task-items li.item .priority .bar {
+  background: #ffcdd2;
+}
+ul.task-items li.item .user {
+  width: 30px;
+}
+ul.task-items li.item .user img {
+  border-radius: 50%;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid red;
+  border-radius: 0.6em;
+  color: red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  /* margin: 20px; */
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  transition: all 150ms ease-in-out;
+}
+.btn:hover,
+.btn:focus {
+  color: black;
+  outline: 0;
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+
+/**
+ * 1. Adjust this to size
+ */
+
+.switch {
+  display: inline-block;
+  font-size: 20px; /* 1 */
+  height: 1em;
+  width: 2em;
+  background: #bdb9a6;
+  border-radius: 1em;
+}
+
+.switch div {
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  background: #fff;
+  box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 300ms;
+  -moz-transition: all 300ms;
+  transition: all 300ms;
+}
+
+.switch input:checked + div {
+  background: #1fb10f;
+}
+
+.switch input:checked + div {
+  -webkit-transform: translate3d(100%, 0, 0);
+  -moz-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    max-width: 90% !important;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media only screen and (max-width: 700px) {
+  :root {
+    --topicWidth: 60%;
+    --statusWidth: 20%;
+    --progressWidth: 20%;
+  }
+
+  .btn {
+    font-size: 15px;
+  }
+
+  ul.task-items li.item .status {
+    justify-content: flex-end;
+  }
+
+  header .questions-col {
+    text-align: right;
+  }
+
+  header .progress-col {
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  :root {
+    --topicWidth: 50%;
+    --topicName: 100%;
+    --statusWidth: 30%;
+    --progressWidth: 20%;
+  }
+
+  .btn {
+    font-size: 10px;
   }
 }
